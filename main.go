@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 )
 
 func main() {
@@ -27,9 +28,16 @@ func main() {
 	s, sep = "", ""
 	// range sobre todo os.Args, incluindo o índice 0 (nome do programa).
 	for i, arg := range os.Args[0:] {
+		// --- Exercício 1.3: medir o tempo ---
+		// time.Now() marca o início; time.Since(ini) devolve a duração desde então.
+		// Atenção: aqui o tempo medido é de UMA volta e inclui o Printf (I/O),
+		// não só a concatenação. Para comparar com strings.Join de forma justa,
+		// meça o laço inteiro, sem imprimir dentro dele.
+		ini := time.Now()
 		fmt.Printf("Índice: %d, Letra: %s\n", i, arg)
 		s += sep + arg
 		sep = " "
+		fmt.Println(time.Since(ini))
 	}
 	fmt.Println(s)
 
@@ -37,5 +45,8 @@ func main() {
 	// Junta os elementos do slice com o separador dado. É mais eficiente que
 	// `s += ...` em laço: como strings são imutáveis, cada concatenação cria
 	// uma string nova e copia a anterior.
+	// Exercício 1.3: aqui o tempo medido é só o Join + a impressão, numa única chamada.
+	ini := time.Now()
 	fmt.Print(strings.Join(os.Args[1:], " "))
+	fmt.Println(time.Since(ini))
 }
