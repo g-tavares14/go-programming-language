@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -33,4 +34,10 @@ func main() {
 		sep = " "
 	}
 	fmt.Println(s)
+
+	// --- Echo3: strings.Join ---
+	// Junta os elementos do slice com o separador dado. É mais eficiente que
+	// `s += ...` em laço: como strings são imutáveis, cada concatenação cria
+	// uma string nova e copia a anterior.
+	fmt.Print(strings.Join(os.Args[1:], " "))
 }
