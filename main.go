@@ -22,14 +22,12 @@ func main() {
 	}
 	fmt.Println(s)
 
-	// --- Echo2: o mesmo com range ---
+	// --- Exercícios 1.1 e 1.2: imprimir os.Args[0] e índice/valor de cada argumento ---
 	// Reaproveitamos s e sep com `=` (e não `:=`, que daria erro: sem variáveis novas).
 	s, sep = "", ""
-	// range devolve (índice, valor) a cada volta. O índice não é usado aqui;
-	// o identificador em branco `_` o descarta, já que Go não permite
-	// variáveis locais declaradas e não usadas.
-	// os.Args[1:] pula o índice 0 (nome do programa).
-	for _, arg := range os.Args[1:] {
+	// range sobre todo os.Args, incluindo o índice 0 (nome do programa).
+	for i, arg := range os.Args[0:] {
+		fmt.Printf("Índice: %d, Letra: %s\n", i, arg)
 		s += sep + arg
 		sep = " "
 	}
