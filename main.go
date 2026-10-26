@@ -20,4 +20,17 @@ func main() {
 		sep = " "
 	}
 	fmt.Println(s)
+
+	// --- Echo2: o mesmo com range ---
+	// Reaproveitamos s e sep com `=` (e não `:=`, que daria erro: sem variáveis novas).
+	s, sep = "", ""
+	// range devolve (índice, valor) a cada volta. O índice não é usado aqui;
+	// o identificador em branco `_` o descarta, já que Go não permite
+	// variáveis locais declaradas e não usadas.
+	// os.Args[1:] pula o índice 0 (nome do programa).
+	for _, arg := range os.Args[1:] {
+		s += sep + arg
+		sep = " "
+	}
+	fmt.Println(s)
 }
